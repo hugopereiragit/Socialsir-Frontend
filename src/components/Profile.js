@@ -3,13 +3,15 @@ import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { Link } from 'react-router-dom';
 import dayjs from 'dayjs';
-
+import EditDetails from './EditDetails';
 
 // MUI stuff
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import MuiLink from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
+import IconButton from '@material-ui/core/IconButton';
+import Tooltip from '@material-ui/core/Tooltip';
 
 
 // Icons
@@ -22,6 +24,7 @@ import KeyboardReturn from '@material-ui/icons/KeyboardReturn';
 
 //Redux
 import { connect } from 'react-redux';
+import { logoutUser,uploadImage } from '../redux/actions/userActions';
 
 
 const styles = (theme) => ({
@@ -74,6 +77,23 @@ const styles = (theme) => ({
 
 
 class Profile extends Component {
+
+  handleImageChange = (event) => {
+    const image = event.target.files[0];
+    const formData = new FormData();
+    formData.append('image',image,image.name);
+    this.props.uploadImage(formData);
+  }
+  handleEditImage = () => {
+    const input = document.getElementById('imageInput');
+    input.click();
+  }
+
+  handleLogout = () => {
+    this.props.logoutUser();
+  }
+
+
     render() {
         const {classes,user: {credentials: {handle,createAt,imageUrl,bio,website,location},loading,authenticated}} = this.props;
       
@@ -86,6 +106,12 @@ class Profile extends Component {
             <div className={classes.profile}>
                 <div className={"image-wrapper"}>
                     <img src={imageUrl} alt="profile" className="profile-image"/>
+                    <input type="file" id="imageInput" onChange={this.handleImageChange} hidden="hidden"/>
+                  <Tooltip title="Editar foto de perfil" placement="top">
+                  <IconButton onClick={this.handleEditImage} className="button">
+                      <EditIcon color = "primary" />
+                    </IconButton>
+                  </Tooltip>
                 </div>
                 <hr/>
                 <div className={"profile-details"}>
@@ -113,6 +139,13 @@ class Profile extends Component {
             <CalendarToday color="primary"/>{'  '}
             <span>Joined {dayjs(createAt).format('MMM YYYY')}</span>
                 </div>
+                <Tooltip title="Logout" placement="top">
+                  <IconButton onClick={this.handleLogout}>
+                    <KeyboardReturn color="primary"/>
+                  </IconButton>
+                </Tooltip>
+
+                <EditDetails/>
             </div>
           </Paper>
         ) : ( //nao auntenticado
@@ -139,7 +172,7 @@ const mapStateToProps = (state) => ({
     user: state.user
   });
   
-  const mapActionsToProps = {};
+  const mapActionsToProps = {logoutUser,uploadImage};
   
   Profile.propTypes = {
     logoutUser: PropTypes.func.isRequired,
