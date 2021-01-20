@@ -68,7 +68,7 @@ const styles = (theme) => ({
     };
     mapUserDetailsToState = (credentials) => {
       this.setState({
-        bio: credentials.bio ? credentials.bio : '',
+        bio: credentials.bio ? credentials.bio : '', //se nao tivermos bio atribuimos valor '' ((vazio))
         website: credentials.website ? credentials.website : '',
         location: credentials.location ? credentials.location : ''
       });
