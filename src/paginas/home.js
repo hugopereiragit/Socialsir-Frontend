@@ -8,29 +8,40 @@ import Grid from '@material-ui/core/Grid'; //para design website MUI
 import Scream from '../components/Scream';
 import Profile from '../components/Profile';
 
+
+
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { getScreams } from '../redux/actions/dataActions';
 //proxy = https://us-central1-socialsir-e995c.cloudfunctions.net/api  //está no package . json
 
 //grid item .... é para o padding
 export class home extends Component {
     //comecar screams(posts) como null
-    state = {
+   /* state = {
         screams : null
     }
+    */
     //buscar os screams
     componentDidMount(){
-        axios.get('/screams')
+
+        
+    this.props.getScreams(); 
+       /* axios.get('/screams')
             .then((res) => {
                     this.setState({
                         screams: res.data
                     })
             })
-            .catch(err => console.log(err));
+            .catch(err => console.log(err));*/
+
     }
 
     
     render() {
-        let recentScreamsMarkup = this.state.screams ? (
-            this.state.screams.map(scream => <Scream key={scream.screamId} scream = {scream}/>) //se não for null significa que já temos a data
+        const { screams, loading } = this.props.data;
+        let recentScreamsMarkup = !loading ? (
+          screams.map((scream) => <Scream key={scream.screamId} scream={scream} />) //se não for null significa que já temos a data
         ) : <p>Loading....</p> //senão loading
         return (
             <Grid container spacing={10}>
@@ -45,4 +56,17 @@ export class home extends Component {
     }
 }
 
-export default home;
+
+home.propTypes = {
+    getScreams: PropTypes.func.isRequired,
+    data: PropTypes.object.isRequired
+  };
+  
+  const mapStateToProps = (state) => ({
+    data: state.data
+  });
+  
+  export default connect(
+    mapStateToProps,
+    { getScreams }
+  )(home);

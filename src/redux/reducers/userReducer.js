@@ -37,7 +37,31 @@ import {
               ...state,
               loading: true
           };
+          
+    case LIKE_SCREAM:
+      return {
+        ...state,
+        likes: [
+          ...state.likes,
+          {
+            userHandle: state.credentials.handle,
+            screamId: action.payload.screamId
+          }
+        ]
+      };
+    case UNLIKE_SCREAM:
+      return {
+        ...state,
+        likes: state.likes.filter(
+          (like) => like.screamId !== action.payload.screamId //para n alterar os outros apenas o que queremos
+        )
+      };
+      case MARK_NOTIFICATIONS_READ:
+      state.notifications.forEach((not) => (not.read = true));
+      return {
+        ...state
+      };
     default:
-        return state;
-    }
+      return state;
+  }
   }
