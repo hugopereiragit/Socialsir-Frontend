@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 // Redux stuff
 import { connect } from 'react-redux';
-import {editUserDetails} from '../redux/actions/userActions';
+import {editUserDetails} from '../../redux/actions/userActions';
 // MUI Stuff
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';

@@ -5,8 +5,8 @@ import Grid from '@material-ui/core/Grid'; //para design website MUI
 
 
 //rce para auto generar isto
-import Scream from '../components/Scream';
-import Profile from '../components/Profile';
+import Scream from '../components/scream/Scream';
+import Profile from '../components/profile/Profile';
 
 
 

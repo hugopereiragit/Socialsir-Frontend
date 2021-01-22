@@ -4,9 +4,10 @@ import dayjs from 'dayjs'; // para o tempo ficar bem formatado
 import relativeTime from 'dayjs/plugin/relativeTime' // funcao de cima
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import MyButton from '../util/MyButton';
+import MyButton from '../../util/MyButton';
 import DeleteScream from './DeleteScream';
-
+import ScreamDialog from './ScreamDialog';
+import LikeButton from './LikeButton';
 // MUI Stuff
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -14,7 +15,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 //redux
 import {connect} from 'react-redux';
-import {likeScream,unlikeScream} from '../redux/actions/dataActions';
+import {likeScream,unlikeScream} from '../../redux/actions/dataActions';
 
 //icons
 import ChatIcon from '@material-ui/icons/Chat';
@@ -81,20 +82,38 @@ class Scream extends Component {
         ) : null
         return (
             <Card className={classes.card}>
-                <CardMedia image = {userImage} title="Imagem de Perfil:" className={classes.image}/>
-                <CardContent className={classes.conteudo}>
-                <Typography variant="h5" component={Link} to={`/users/${userHandle}`} color="primary">{userHandle}</Typography>
-                {deleteButton}
-                <Typography variant="body2" color="textSecondary">{dayjs(createdAt).fromNow()}</Typography>
-                <Typography variant="body1">{body}</Typography>
-                {likeButton}
-                <span>{likeCount}</span>
-                <MyButton tip="comment">
-                    <ChatIcon color="primary"/>
-                </MyButton>
-                <span>{commentCount} comments</span>
-                </CardContent>
-            </Card>
+            <CardMedia
+              image={userImage}
+              title="Profile image"
+              className={classes.image}
+            />
+            <CardContent className={classes.content}>
+              <Typography
+                variant="h5"
+                component={Link}
+                to={`/users/${userHandle}`}
+                color="primary"
+              >
+                {userHandle}
+              </Typography>
+              {deleteButton}
+              <Typography variant="body2" color="textSecondary">
+                {dayjs(createdAt).fromNow()}
+              </Typography>
+              <Typography variant="body1">{body}</Typography>
+              <LikeButton screamId={screamId} />
+              <span>{likeCount} Likes</span>
+              <MyButton tip="comments">
+                <ChatIcon color="primary" />
+              </MyButton>
+              <span>{commentCount} comments</span>
+              <ScreamDialog
+                screamId={screamId}
+                userHandle={userHandle}
+                openDialog={this.props.openDialog} // para abrirmos o scream na pagina do user se não tivermos passa um valor nao defenido e não faz nada
+              />
+            </CardContent>
+          </Card>
         )
     }
 }
@@ -104,7 +123,8 @@ Scream.propTypes = {
     unlikeScream: PropTypes.func.isRequired,
     user: PropTypes.object.isRequired,
     scream: PropTypes.object.isRequired,
-    classes: PropTypes.object.isRequired
+    classes: PropTypes.object.isRequired,
+    openDialog: PropTypes.bool
   };
   
   const mapActionsToProps = {

@@ -86,6 +86,17 @@ import {
   };
 
 
+  export const markNotificationsRead = (notificationIds) => (dispatch) => {
+    axios
+      .post('/notifications', notificationIds)
+      .then((res) => {
+        dispatch({
+          type: MARK_NOTIFICATIONS_READ
+        });
+      })
+      .catch((err) => console.log(err));
+  };
+
   
 const setAuthorizationHeader = (token) => {
   const FBIdToken = `Bearer ${token}`;

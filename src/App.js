@@ -18,7 +18,7 @@ import store from './redux/store'
 
 //componentes
 //import barradeNav from './components/barradeNav'; //não dava por causa do nome???????
-import NavBar from './components/NavBar';
+import NavBar from './components/layout/NavBar';
 import AuthRoute from './util/AuthRoute';
 import {SET_AUTHENTICATED} from './redux/types'
 import {logoutUser,getUserData} from './redux/actions/userActions'
@@ -26,7 +26,10 @@ import {logoutUser,getUserData} from './redux/actions/userActions'
 import home from './paginas/home';
 import login from './paginas/login';
 import signup from './paginas/signup';
-import axios from 'axios'
+import user from './paginas/user';
+
+
+import axios from 'axios';
 
 const theme = createMuiTheme(themeFicheiro);
 //let authenticated;
@@ -63,6 +66,8 @@ function App() {
         <Route exact path ="/" component = {home}/>
         <AuthRoute exact path ="/login" component = {login}/>
         <AuthRoute exact path ="/signup" component = {signup}/>
+        <Route exact path ="/users/:handle" component = {user}/>
+        <Route exact path ="/users/:handle/scream/:screamId" component = {user}/>
       </Switch>
        </div>
      </Router>

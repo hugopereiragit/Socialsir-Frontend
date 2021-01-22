@@ -57,7 +57,7 @@ import {
         )
       };
       case MARK_NOTIFICATIONS_READ:
-      state.notifications.forEach((not) => (not.read = true));
+      state.notifications.forEach((not) => (not.read = true)); //mudar o atributo read de false para true
       return {
         ...state
       };
