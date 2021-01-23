@@ -34,6 +34,7 @@ import axios from 'axios';
 const theme = createMuiTheme(themeFicheiro);
 //let authenticated;
 
+axios.defaults.baseURL = "https://us-central1-socialsir-e995c.cloudfunctions.net/api";
 
 const token = localStorage.FBIdToken;
 if(token){
