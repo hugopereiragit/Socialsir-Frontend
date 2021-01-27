@@ -52,6 +52,7 @@ class PostScream extends Component {
   state = {
     open: false,
     body: '',
+    imageUrl: '',
     errors: {}
   };
   componentWillReceiveProps(nextProps) {
@@ -76,8 +77,15 @@ class PostScream extends Component {
   };
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.postScream({ body: this.state.body });
+    this.props.postScream({ body: this.state.body , imageUrl: this.state.imageUrl});
   };
+  handleImageChange = (event) => {
+    const image = event.target.files[0];
+    const formData = new FormData();
+    formData.append('image',image,image.name);
+  
+  }
+
   render() {
     const { errors } = this.state;
     const {
@@ -118,6 +126,9 @@ class PostScream extends Component {
                 onChange={this.handleChange}
                 fullWidth
               />
+
+
+<input type="file" name="file" onChange={this.handleImageChange} />
               <Button
                 type="submit"
                 variant="contained"

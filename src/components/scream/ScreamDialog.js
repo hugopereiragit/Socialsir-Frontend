@@ -65,6 +65,10 @@ loading:{
     borderRadius: '50%',
     objectFit: 'cover'
   },
+  Image: {
+    maxWidth: 500,
+    maxHeight: 500
+  },
   dialogContent: {
     padding: 20
   },
@@ -133,7 +137,8 @@ class ScreamDialog extends Component {
         commentCount,
         userImage,
         userHandle,
-        comments
+        comments,
+        imageUrl
       },
       UI: { loading }
     } = this.props;
@@ -169,9 +174,14 @@ class ScreamDialog extends Component {
           </MyButton>
           <span>{commentCount} comments</span>
         </Grid>
+        
+        <Grid>
+        <img src={imageUrl} className={classes.Image} />
+        </Grid>
         <hr className={classes.visibleSeperator}/>
         <CommentForm screamId={screamId} />
         <Comments comments={comments}/>
+        
       </Grid>
     );
     return (

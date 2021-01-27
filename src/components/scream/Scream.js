@@ -29,8 +29,17 @@ const styles = {
         marginBottom:20,
     },
     image:{
-        minWidth:200,
+        minWidth:150,
+        maxHeight:150,
+        borderRadius: '50%',
+   
     },
+    imagepost:{
+      minWidth:200,
+      maxWidth:200,
+     
+ 
+  },
     conteudo:{
         padding:25,
         objectFit: 'Cover' //anti stretch nao funciona as vezes?
@@ -56,9 +65,12 @@ class Scream extends Component {
 
     render() {
         dayjs.extend(relativeTime)
-        const {classes, scream:{ body,createdAt,userImage,userHandle,screamId,likeCount,commentCount},
+        const {classes, scream:{ body,createdAt,userImage,userHandle,screamId,likeCount,commentCount,imageUrl},
                         user: {authenticated,credentials: {handle}}
+                
     } = this.props;
+    console.log(imageUrl);
+    
         const likeButton = !authenticated ? (
             <MyButton tip ="Like">
                 <Link to ="/login">
@@ -80,6 +92,14 @@ class Scream extends Component {
         const deleteButton = authenticated && userHandle === handle ? (
             <DeleteScream screamId={screamId}/>
         ) : null
+
+
+        if(imageUrl != null){
+        const imagemPrint = imageUrl
+        } else {
+          const imagemPrint = null;
+        }
+
         return (
             <Card className={classes.card}>
             <CardMedia
@@ -87,6 +107,7 @@ class Scream extends Component {
               title="Profile image"
               className={classes.image}
             />
+
             <CardContent className={classes.content}>
               <Typography
                 variant="h5"
@@ -107,13 +128,25 @@ class Scream extends Component {
                 <ChatIcon color="primary" />
               </MyButton>
               <span>{commentCount} comments</span>
+              
               <ScreamDialog
                 screamId={screamId}
                 userHandle={userHandle}
                 openDialog={this.props.openDialog} // para abrirmos o scream na pagina do user se não tivermos passa um valor nao defenido e não faz nada
               />
+              
             </CardContent>
+
+            <CardMedia
+              image={imageUrl}
+              title="Profile image"
+              className={classes.imagepost}
+            />
+
+            
+ 
           </Card>
+
         )
     }
 }

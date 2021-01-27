@@ -78,21 +78,21 @@ class Notifications extends Component {
                 variant="body1"
                 to={`/users/${not.recipient}/scream/${not.screamId}`}
               >
-                {not.sender} {verb} your scream {time}
+                {not.sender} {verb} your post {time}
               </Typography>
             </MenuItem>
           );
         })
       ) : (
         <MenuItem onClick={this.handleClose}>
-          You have no notifications yet
+          Não tens notificações
         </MenuItem>
       );
     return (
       <Fragment>
         <Tooltip placement="top" title="Notifications">
           <IconButton
-            aria-owns={anchorEl ? 'simple-menu' : undefined}
+            aria-owns={anchorEl ? 'simple-menu' : undefined} //documentação aria-owns
             aria-haspopup="true"
             onClick={this.handleOpen}
           >

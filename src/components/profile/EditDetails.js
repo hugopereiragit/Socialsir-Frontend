@@ -154,10 +154,10 @@ const styles = (theme) => ({
             </DialogContent>
             <DialogActions>
               <Button onClick={this.handleClose} color="primary">
-                Cancel
+                Cancelar
               </Button>
               <Button onClick={this.handleSubmit} color="primary">
-                Save
+                Guardar
               </Button>
             </DialogActions>
           </Dialog>

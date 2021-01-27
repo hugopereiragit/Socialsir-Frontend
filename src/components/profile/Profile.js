@@ -137,7 +137,7 @@ class Profile extends Component {
               </Fragment>
             )}
             <CalendarToday color="primary"/>{'  '}
-            <span>Joined {dayjs(createAt).format('MMM YYYY')}</span>
+            <span>Juntou-se em {dayjs(createAt).format('MMM YYYY')}</span>
                 </div>
                 <Tooltip title="Logout" placement="top">
                   <IconButton onClick={this.handleLogout}>
