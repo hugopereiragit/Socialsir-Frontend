@@ -33,9 +33,9 @@ class user extends Component {
     const { screams, loading } = this.props.data;
     const { screamIdParam } = this.state;
     const screamsMarkup = loading ? (
-      <p>LOOOOOADING IN MY SCREEEEEEEEEEEEEN</p>
+      <p style={{color: "red"}}>Loading...</p>
     ) : screams === null ? (
-      <p>ESTE USER NAO TEM POSTS</p>
+      <p>Este user nao tem posts!</p>
     ) : !screamIdParam ? (
       screams.map((scream) => <Scream key={scream.screamId} scream={scream} />) // se nao tivermos id param estamos a visitar pagina user
     ) : (
