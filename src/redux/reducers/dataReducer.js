@@ -6,7 +6,8 @@ import {
     DELETE_SCREAM,
     POST_SCREAM,
     SET_SCREAM,
-    SUBMIT_COMMENT
+    SUBMIT_COMMENT,
+    SUBMIT_IMAGE
   } from '../types';
   
   const initialState = {
@@ -33,6 +34,7 @@ import {
           ...state,
           scream: action.payload
         };
+      case SUBMIT_IMAGE:
       case LIKE_SCREAM:
       case UNLIKE_SCREAM:
         let index = state.screams.findIndex(
