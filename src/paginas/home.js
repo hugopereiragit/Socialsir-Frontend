@@ -35,7 +35,7 @@ export class home extends Component {
     let recentScreamsMarkup = !loading ? (
       screams.map((scream) => <Scream key={scream.screamId} scream={scream} />) //se não for null significa que já temos a data
     ) : (
-      <p>Loading....</p>
+      <p style={{ color: "red" }}>Loading....</p>
     ); //senão loading
     return (
       <Grid container spacing={10}>

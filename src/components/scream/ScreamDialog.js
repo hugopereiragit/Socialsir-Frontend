@@ -1,4 +1,3 @@
-  
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -176,7 +175,7 @@ class ScreamDialog extends Component {
         </Grid>
         
         <Grid>
-        <img src={imageUrl} className={classes.Image} />
+        <img src={imageUrl} className={classes.Image} alt="imageUrl"/>
         </Grid>
         <hr className={classes.visibleSeperator}/>
         <CommentForm screamId={screamId} />
