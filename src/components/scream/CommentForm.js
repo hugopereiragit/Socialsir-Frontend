@@ -1,115 +1,116 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import withStyles from '@material-ui/core/styles/withStyles';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import withStyles from "@material-ui/core/styles/withStyles";
 // MUI Stuff
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
+import Button from "@material-ui/core/Button";
+import Grid from "@material-ui/core/Grid";
+import TextField from "@material-ui/core/TextField";
 // Redux stuff
-import { connect } from 'react-redux';
-import { submitComment } from '../../redux/actions/dataActions';
+import { connect } from "react-redux";
+import { submitComment } from "../../redux/actions/dataActions";
 
 const styles = (theme) => ({
   palette: {
     primary: {
-      main: '#283593',
-      light: '#33c9dc',
-    dark: '#008394',
-    contrastText: '#fff'
+      main: "#283593",
+      light: "#33c9dc",
+      dark: "#008394",
+      contrastText: "#fff",
     },
     secondary: {
-      main: '#4fc3f7',
-      light: '#ff6333',
-      dark: '#b22a00',
-      contrastText: '#fff'
+      main: "#4fc3f7",
+      light: "#ff6333",
+      dark: "#b22a00",
+      contrastText: "#fff",
     },
-  },typography: {
-    useNextVariants: true
+  },
+  typography: {
+    useNextVariants: true,
   },
   form: {
-    textAlign: 'center'
+    textAlign: "center",
   },
   image: {
-    margin: '20px auto 20px auto'
+    margin: "20px auto 20px auto",
   },
   pageTitle: {
-    margin: '10px auto 10px auto'
+    margin: "10px auto 10px auto",
   },
   textField: {
-    margin: '10px auto 10px auto'
+    margin: "10px auto 10px auto",
   },
   button: {
     marginTop: 20,
-    position: 'relative'
+    position: "relative",
   },
   customError: {
-    color: 'red',
-    fontSize: '0.8rem',
-    marginTop: 10
+    color: "red",
+    fontSize: "0.8rem",
+    marginTop: 10,
   },
   progress: {
-    position: 'absolute'
+    position: "absolute",
   },
   invisibleSeparator: {
-    border: 'none',
-    margin: 4
+    border: "none",
+    margin: 4,
   },
   visibleSeparator: {
-    width: '100%',
-    borderBottom: '1px solid rgba(0,0,0,0.1)',
-    marginBottom: 20
+    width: "100%",
+    borderBottom: "1px solid rgba(0,0,0,0.1)",
+    marginBottom: 20,
   },
   paper: {
-    padding: 20
+    padding: 20,
   },
   profile: {
-    '& .image-wrapper': {
-      textAlign: 'center',
-      position: 'relative',
-      '& button': {
-        position: 'absolute',
-        top: '80%',
-        left: '70%'
-      }
+    "& .image-wrapper": {
+      textAlign: "center",
+      position: "relative",
+      "& button": {
+        position: "absolute",
+        top: "80%",
+        left: "70%",
+      },
     },
-    '& .profile-image': {
+    "& .profile-image": {
       width: 200,
       height: 200,
-      objectFit: 'cover',
-      maxWidth: '100%',
-      borderRadius: '50%'
+      objectFit: "cover",
+      maxWidth: "100%",
+      borderRadius: "50%",
     },
-    '& .profile-details': {
-      textAlign: 'center',
-      '& span, svg': {
-        verticalAlign: 'middle'
+    "& .profile-details": {
+      textAlign: "center",
+      "& span, svg": {
+        verticalAlign: "middle",
       },
-      '& a': {
-        color: '#00bcd4'
-      }
+      "& a": {
+        color: "#00bcd4",
+      },
     },
-    '& hr': {
-      border: 'none',
-      margin: '0 0 10px 0'
+    "& hr": {
+      border: "none",
+      margin: "0 0 10px 0",
     },
-    '& svg.button': {
-      '&:hover': {
-        cursor: 'pointer'
-      }
-    }
+    "& svg.button": {
+      "&:hover": {
+        cursor: "pointer",
+      },
+    },
   },
   buttons: {
-    textAlign: 'center',
-    '& a': {
-      margin: '20px 10px'
-    }
+    textAlign: "center",
+    "& a": {
+      margin: "20px 10px",
+    },
   },
 });
 
 class CommentForm extends Component {
   state = {
-    body: '',
-    errors: {}
+    body: "",
+    errors: {},
   };
 
   componentWillReceiveProps(nextProps) {
@@ -117,7 +118,7 @@ class CommentForm extends Component {
       this.setState({ errors: nextProps.UI.errors });
     }
     if (!nextProps.UI.errors && !nextProps.UI.loading) {
-      this.setState({ body: '' });
+      this.setState({ body: "" });
     }
   }
 
@@ -134,7 +135,7 @@ class CommentForm extends Component {
     const errors = this.state.errors;
 
     const commentFormMarkup = authenticated ? (
-      <Grid item sm={12} style={{ textAlign: 'center' }}>
+      <Grid item sm={12} style={{ textAlign: "center" }}>
         <form onSubmit={this.handleSubmit}>
           <TextField
             name="body"
@@ -168,15 +169,14 @@ CommentForm.propTypes = {
   UI: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
   screamId: PropTypes.string.isRequired,
-  authenticated: PropTypes.bool.isRequired
+  authenticated: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   UI: state.UI,
-  authenticated: state.user.authenticated
+  authenticated: state.user.authenticated,
 });
 
-export default connect(
-  mapStateToProps,
-  { submitComment }
-)(withStyles(styles)(CommentForm));
+export default connect(mapStateToProps, { submitComment })(
+  withStyles(styles)(CommentForm)
+);

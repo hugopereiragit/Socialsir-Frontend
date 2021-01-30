@@ -1,68 +1,68 @@
-import React, { Component, Fragment } from 'react';
-import PropTypes from 'prop-types';
-import withStyles from '@material-ui/core/styles/withStyles';
-import MyButton from '../../util/MyButton';
+import React, { Component, Fragment } from "react";
+import PropTypes from "prop-types";
+import withStyles from "@material-ui/core/styles/withStyles";
+import MyButton from "../../util/MyButton";
 // MUI Stuff
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import AddIcon from '@material-ui/icons/Add';
-import CloseIcon from '@material-ui/icons/Close';
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import Dialog from "@material-ui/core/Dialog";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import AddIcon from "@material-ui/icons/Add";
+import CloseIcon from "@material-ui/icons/Close";
 // Redux stuff
-import { connect } from 'react-redux';
-import { postScream, clearErrors } from '../../redux/actions/dataActions';
+import { connect } from "react-redux";
+import { postScream, clearErrors } from "../../redux/actions/dataActions";
 
 const styles = (theme) => ({
-      form: {
-        textAlign: 'Center'
-    },
-    pageTitle: {
-        margin:'10px auto 10px auto'
-    },
-    textField: {
-        margin:'10px auto 10px auto'
-    },
-    button: {
-        color: '#fff',
-        marginTop: 20,
-        position: 'relative' //para darmos absolute ao loading para ficar no meio
-    },
-    loading:{
-        position:'absolute'
-    },
+  form: {
+    textAlign: "Center",
+  },
+  pageTitle: {
+    margin: "10px auto 10px auto",
+  },
+  textField: {
+    margin: "10px auto 10px auto",
+  },
+  button: {
+    color: "#fff",
+    marginTop: 20,
+    position: "relative", //para darmos absolute ao loading para ficar no meio
+  },
+  loading: {
+    position: "absolute",
+  },
   submitButton: {
-    position: 'relative',
-    float: 'right',
-    marginTop: 10
+    position: "relative",
+    float: "right",
+    marginTop: 10,
   },
   progressSpinner: {
-    position: 'absolute'
+    position: "absolute",
   },
   closeButton: {
-    position: 'absolute',
-    left: '91%',
-    top: '6%'
-  }
+    position: "absolute",
+    left: "91%",
+    top: "6%",
+  },
 });
 
 class PostScream extends Component {
   state = {
     open: false,
-    body: '',
-    imageUrl: '',
-    errors: {}
+    body: "",
+    imageUrl: "",
+    errors: {},
   };
   componentWillReceiveProps(nextProps) {
     if (nextProps.UI.errors) {
       this.setState({
-        errors: nextProps.UI.errors
+        errors: nextProps.UI.errors,
       });
     }
     if (!nextProps.UI.errors && !nextProps.UI.loading) {
-      this.setState({ body: '', open: false, errors: {} }); //fechar sem chamar o handle close porque estava a dar infinite loop
+      this.setState({ body: "", open: false, errors: {} }); //fechar sem chamar o handle close porque estava a dar infinite loop
     }
   }
   handleOpen = () => {
@@ -77,25 +77,27 @@ class PostScream extends Component {
   };
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.postScream({ body: this.state.body , imageUrl: this.state.imageUrl});
+    this.props.postScream({
+      body: this.state.body,
+      imageUrl: this.state.imageUrl,
+    });
   };
   handleImageChange = (event) => {
     const image = event.target.files[0];
     const formData = new FormData();
-    formData.append('image',image,image.name);
-  
-  }
+    formData.append("image", image, image.name);
+  };
 
   render() {
     const { errors } = this.state;
     const {
       classes,
-      UI: { loading }
+      UI: { loading },
     } = this.props;
     return (
       <Fragment>
         <MyButton onClick={this.handleOpen} tip="Postar!">
-          <AddIcon color='secondary'/>
+          <AddIcon color="secondary" />
         </MyButton>
         <Dialog
           open={this.state.open}
@@ -127,8 +129,11 @@ class PostScream extends Component {
                 fullWidth
               />
 
-
-<input type="file" name="file" onChange={this.handleImageChange} />
+              <input
+                type="file"
+                name="file"
+                onChange={this.handleImageChange}
+              />
               <Button
                 type="submit"
                 variant="contained"
@@ -155,14 +160,13 @@ class PostScream extends Component {
 PostScream.propTypes = {
   postScream: PropTypes.func.isRequired,
   clearErrors: PropTypes.func.isRequired,
-  UI: PropTypes.object.isRequired
+  UI: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  UI: state.UI
+  UI: state.UI,
 });
 
-export default connect(
-  mapStateToProps,
-  { postScream, clearErrors }
-)(withStyles(styles)(PostScream));
+export default connect(mapStateToProps, { postScream, clearErrors })(
+  withStyles(styles)(PostScream)
+);

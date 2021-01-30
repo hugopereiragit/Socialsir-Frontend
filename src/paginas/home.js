@@ -36,7 +36,7 @@ export class home extends Component {
       screams.map((scream) => <Scream key={scream.screamId} scream={scream} />) //se não for null significa que já temos a data
     ) : (
       <p style={{ color: "red" }}>Loading....</p>
-    ); //senão loading
+    ); //se não loading
     return (
       <Grid container spacing={10}>
         <Grid item sm={8} xs={12}>

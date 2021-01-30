@@ -33,7 +33,7 @@ class user extends Component {
     const { screams, loading } = this.props.data;
     const { screamIdParam } = this.state;
     const screamsMarkup = loading ? (
-      <p style={{color: "red"}}>Loading...</p>
+      <p style={{ color: "red" }}>Loading...</p>
     ) : screams === null ? (
       <p>Este user nao tem posts!</p>
     ) : !screamIdParam ? (

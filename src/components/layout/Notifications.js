@@ -1,25 +1,25 @@
-import React, { Component, Fragment } from 'react';
-import { Link } from 'react-router-dom';
-import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
-import PropTypes from 'prop-types';
+import React, { Component, Fragment } from "react";
+import { Link } from "react-router-dom";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import PropTypes from "prop-types";
 // MUI stuff
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import IconButton from '@material-ui/core/IconButton';
-import Tooltip from '@material-ui/core/Tooltip';
-import Typography from '@material-ui/core/Typography';
-import Badge from '@material-ui/core/Badge';
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import IconButton from "@material-ui/core/IconButton";
+import Tooltip from "@material-ui/core/Tooltip";
+import Typography from "@material-ui/core/Typography";
+import Badge from "@material-ui/core/Badge";
 // Icons
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ChatIcon from '@material-ui/icons/Chat';
+import NotificationsIcon from "@material-ui/icons/Notifications";
+import FavoriteIcon from "@material-ui/icons/Favorite";
+import ChatIcon from "@material-ui/icons/Chat";
 // Redux
-import { connect } from 'react-redux';
-import { markNotificationsRead } from '../../redux/actions/userActions';
+import { connect } from "react-redux";
+import { markNotificationsRead } from "../../redux/actions/userActions";
 class Notifications extends Component {
   state = {
-    anchorEl: null
+    anchorEl: null,
   };
   handleOpen = (event) => {
     this.setState({ anchorEl: event.target });
@@ -59,11 +59,11 @@ class Notifications extends Component {
     let notificationsMarkup =
       notifications && notifications.length > 0 ? (
         notifications.map((not) => {
-          const verb = not.type === 'like' ? 'liked' : 'commented on';
+          const verb = not.type === "like" ? "liked" : "commented on";
           const time = dayjs(not.createdAt).fromNow();
-          const iconColor = not.read ? 'primary' : 'secondary';
+          const iconColor = not.read ? "primary" : "secondary";
           const icon =
-            not.type === 'like' ? (
+            not.type === "like" ? (
               <FavoriteIcon color={iconColor} style={{ marginRight: 10 }} />
             ) : (
               <ChatIcon color={iconColor} style={{ marginRight: 10 }} />
@@ -84,15 +84,13 @@ class Notifications extends Component {
           );
         })
       ) : (
-        <MenuItem onClick={this.handleClose}>
-          Não tens notificações
-        </MenuItem>
+        <MenuItem onClick={this.handleClose}>Não tens notificações</MenuItem>
       );
     return (
       <Fragment>
         <Tooltip placement="top" title="Notifications">
           <IconButton
-            aria-owns={anchorEl ? 'simple-menu' : undefined} //documentação aria-owns
+            aria-owns={anchorEl ? "simple-menu" : undefined} //documentação aria-owns
             aria-haspopup="true"
             onClick={this.handleOpen}
           >
@@ -114,14 +112,13 @@ class Notifications extends Component {
 
 Notifications.propTypes = {
   markNotificationsRead: PropTypes.func.isRequired,
-  notifications: PropTypes.array.isRequired
+  notifications: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  notifications: state.user.notifications
+  notifications: state.user.notifications,
 });
 
-export default connect(
-  mapStateToProps,
-  { markNotificationsRead }
-)(Notifications);
+export default connect(mapStateToProps, { markNotificationsRead })(
+  Notifications
+);
