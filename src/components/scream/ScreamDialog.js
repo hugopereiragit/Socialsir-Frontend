@@ -176,7 +176,7 @@ class ScreamDialog extends Component {
         </Grid>
 
         <Grid>
-          <img src={imageUrl} className={classes.Image} alt="imageUrl" />
+          <img src={imageUrl} className={classes.Image} />
         </Grid>
         <hr className={classes.visibleSeperator} />
         <CommentForm screamId={screamId} />

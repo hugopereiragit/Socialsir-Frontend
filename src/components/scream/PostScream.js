@@ -118,7 +118,7 @@ class PostScream extends Component {
               <TextField
                 name="body"
                 type="text"
-                label="SCREAM!!"
+                label="Texto:"
                 multiline
                 rows="3"
                 placeholder="TEXTO PLACEHOLDER"
@@ -129,11 +129,7 @@ class PostScream extends Component {
                 fullWidth
               />
 
-              <input
-                type="file"
-                name="file"
-                onChange={this.handleImageChange}
-              />
+          
               <Button
                 type="submit"
                 variant="contained"
