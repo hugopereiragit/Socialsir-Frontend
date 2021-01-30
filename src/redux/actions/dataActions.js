@@ -11,7 +11,8 @@ import {
     LOADING_UI,
     SET_SCREAM,
     STOP_LOADING_UI,
-    SUBMIT_COMMENT
+    SUBMIT_COMMENT,
+    SUBMIT_IMAGE
   } from '../types';
   import axios from 'axios';
 
@@ -122,6 +123,23 @@ export const submitComment = (screamId, commentData) => (dispatch) => {
       });
     });
 };
+
+
+export const uploadImage = (screamId,formData) => (dispatch) => {
+  dispatch({type: LOADING_DATA});
+  axios.post(`/scream/${screamId}/image`,formData)
+  .then(res => {
+    dispatch({
+      type: SUBMIT_IMAGE,
+      payload: res.data
+    });
+    
+  })
+  .then(res => {
+    dispatch(getScreams());
+  })
+  .catch(err => console.log(err));
+}
 
 
 export const getUserData = (userHandle) => (dispatch) => {

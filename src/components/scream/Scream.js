@@ -8,6 +8,7 @@ import MyButton from '../../util/MyButton';
 import DeleteScream from './DeleteScream';
 import ScreamDialog from './ScreamDialog';
 import LikeButton from './LikeButton';
+import ScreamImage from './ScreamImage';
 // MUI Stuff
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -43,6 +44,9 @@ const styles = {
     conteudo:{
         padding:25,
         objectFit: 'Cover' //anti stretch nao funciona as vezes?
+    },
+    imageButton: {
+      center: 'left'
     }
 }
 
@@ -91,8 +95,13 @@ class Scream extends Component {
                                                                         //se nao for post do ultizador com login nao tem delete button
         const deleteButton = authenticated && userHandle === handle ? (
             <DeleteScream screamId={screamId}/>
+          
         ) : null
 
+        const imageButton = authenticated && userHandle === handle ? (
+          <ScreamImage screamId={screamId}/>
+        
+      ) : null
 
         if(imageUrl != null){
         const imagemPrint = imageUrl
@@ -118,6 +127,7 @@ class Scream extends Component {
                 {userHandle}
               </Typography>
               {deleteButton}
+              {imageButton}
               <Typography variant="body2" color="textSecondary">
                 {dayjs(createdAt).fromNow()}
               </Typography>
