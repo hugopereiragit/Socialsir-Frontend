@@ -1,4 +1,4 @@
-Fully functional twitter clone made in javascript. O programa esta explicado no relatorio.docx.
+Fully functional twitter clone made in javascript. O programa esta explicado no documento pdf
 
 Pagina Login
 ![Login](https://github.com/user-attachments/assets/69f0a581-bf5d-4517-a03c-26e0a96cc9c9)
