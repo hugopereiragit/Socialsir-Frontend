@@ -1,3 +1,23 @@
+Fully functional twitter clone made in javascript. O programa esta explicado no relatorio.docx.
+
+Pagina Login
+![Login](https://github.com/user-attachments/assets/69f0a581-bf5d-4517-a03c-26e0a96cc9c9)
+
+Pagina Loading
+![loading](https://github.com/user-attachments/assets/7f4e96bd-8ae2-410e-982f-fe63946809df)
+
+Landing page
+![loadedpage](https://github.com/user-attachments/assets/1ea2810c-609c-465a-a0e0-254867b9aace)
+
+Editing profile
+![Editing](https://github.com/user-attachments/assets/d692fe22-6282-4516-815e-406cd522bc22)
+
+Posting
+![posting](https://github.com/user-attachments/assets/cfb191c6-7467-4b62-9121-5747f098b053)
+
+Comment on post
+![commenting on post](https://github.com/user-attachments/assets/ed6bbbf1-2b21-4a0b-9c68-5da798a118bf)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
